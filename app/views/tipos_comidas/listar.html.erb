@@ -1,0 +1,15 @@
+<h1>Listar los tipos de restaurantes</h1>
+
+<table>
+    <tr>
+        <th>id</th>
+        <th>tipo</th>
+    </tr>
+
+    <% @todos_los_tipos.each do |tipo_comida| %>
+        <tr>
+            <td> <%= tipo_comida.id %> </td>
+            <td> <%= tipo_comida.tipo %> </td>
+        </tr>
+    <% end %>
+</table>
