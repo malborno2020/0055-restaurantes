@@ -10,10 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_19_013154) do
+ActiveRecord::Schema.define(version: 2021_10_20_011957) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "puntajes", force: :cascade do |t|
+    t.string "tipo"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "restaurantes", force: :cascade do |t|
     t.string "nombre"
@@ -23,11 +29,11 @@ ActiveRecord::Schema.define(version: 2021_10_19_013154) do
     t.index ["tipo_comida_id"], name: "index_restaurantes_on_tipo_comida_id"
   end
 
-  create_table "tipo_comidas", force: :cascade do |t|
+  create_table "tipos_comidas", id: :bigint, default: -> { "nextval('tipo_comidas_id_seq'::regclass)" }, force: :cascade do |t|
     t.string "tipo"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  add_foreign_key "restaurantes", "tipo_comidas"
+  add_foreign_key "restaurantes", "tipos_comidas"
 end

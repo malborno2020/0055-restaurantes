@@ -1,0 +1,2 @@
+class Puntaje < ApplicationRecord
+end
