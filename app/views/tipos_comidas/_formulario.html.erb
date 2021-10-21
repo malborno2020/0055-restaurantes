@@ -1,8 +1,8 @@
 <%= form_with(model: base_tipo_comida) do |formulario| %>
     <%= formulario.label        :tipo %>
     <%= formulario.text_field   :tipo %>
-    <%= if base_tipo_comida.errors[:tipo].any? %>
+    <% if base_tipo_comida.errors[:tipo].any? %>
     <%= baase_tipo_comida.errors[:tipo].first %>
-    <%= end %>
+    <% end %>
     <%= formulario.submit %>
 <% end %>
