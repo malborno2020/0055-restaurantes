@@ -28,8 +28,12 @@ class TiposComidasController < ApplicationController
     def guardar
         # guardar lo que llegue del formulario en la base de datos
         datos_tipo_comida = params.require(:tipo_comida).permit(:tipo)
-        nuevo_tipo = TipoComida.new(datos_tipo_comida)
-        nuevo_tipo.save
+        @tipo_comida = TipoComida.new(datos_tipo_comida)
+        if @tipo_comida.save
+            redirect_to tipos_comidas_path
+        else
+            render  :crear
+        end
 
         redirect_to tipos_comidas_path
     end
