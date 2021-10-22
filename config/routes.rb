@@ -21,4 +21,8 @@ Rails.application.routes.draw do
   put       'puntajes/:id',             to: 'puntajes#actualizar'
   patch     'puntajes/:id',             to: 'puntajes#actualizar'
   delete    'puntajes/:id',             to: 'puntajes#eliminar'
+
+  # Usuarios
+  get       'usuarios/nuevo',           to: 'usuarios#crear',           as: 'nuevo_usuario'
+  post      'usuarios',                 to: 'usuarios#guardar',         as: 'usuarios'
 end

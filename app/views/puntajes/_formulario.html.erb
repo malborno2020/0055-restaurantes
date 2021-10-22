@@ -2,7 +2,7 @@
     <%= formulario.label        :tipo %>
     <%= formulario.text_field   :tipo %>
     <% if base_puntaje.errors[:tipo].any? %>
-            <%= base_puntaje.errors[:tipo].first %>
+        <%= base_puntaje.errors[:tipo].first %>
     <% end %>
     <%= formulario.submit %>
 <% end %>

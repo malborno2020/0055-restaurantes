@@ -35,7 +35,6 @@ class TiposComidasController < ApplicationController
             render  :crear
         end
 
-        redirect_to tipos_comidas_path
     end
 
     def actualizar

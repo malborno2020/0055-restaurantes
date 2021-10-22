@@ -28,8 +28,8 @@ class PuntajesController < ApplicationController
     def guardar
         # guardar lo que llegue del formulario en la base de datos
         datos_puntaje = params.require(:puntaje).permit(:tipo)
-        @nuevo_puntaje = Puntaje.new(datos_puntaje)
-        if @nuevo_puntaje.save
+        @puntaje = Puntaje.new(datos_puntaje)
+        if @puntaje.save
             redirect_to puntajes_path
         else
             render  :crear

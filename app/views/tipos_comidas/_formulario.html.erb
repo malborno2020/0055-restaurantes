@@ -2,7 +2,7 @@
     <%= formulario.label        :tipo %>
     <%= formulario.text_field   :tipo %>
     <% if base_tipo_comida.errors[:tipo].any? %>
-    <%= baase_tipo_comida.errors[:tipo].first %>
+        <%= base_tipo_comida.errors[:tipo].first %>
     <% end %>
     <%= formulario.submit %>
 <% end %>
