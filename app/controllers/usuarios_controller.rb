@@ -9,6 +9,11 @@ class UsuariosController < ApplicationController
         @usuario = Usuario.find(params[:id])
     end
 
+    #GET/usuarios/editar
+    def editar
+        @usuario = Usuario.find(params[:id])
+    end
+
     #POST/usuarios
     def guardar
         #controlar que variables recibir
@@ -20,7 +25,6 @@ class UsuariosController < ApplicationController
         else
             render  :crear
         end
-
 
     end
 end
