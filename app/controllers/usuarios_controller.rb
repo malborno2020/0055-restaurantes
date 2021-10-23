@@ -25,6 +25,16 @@ class UsuariosController < ApplicationController
         else
             render  :crear
         end
+    end
 
+    #PATCH/usuarios/:id
+    def actualizar
+        @usuario = Usuario.find(params[:id])
+        datos_usuario = params.require(:usuario).permit(:nombre_usuario, :password, :password_confirmation)
+        if @usuario.update(datos_usuario)
+            redirect_to usuario_path(@usuario)
+        else
+            render  :editar
+        end
     end
 end
