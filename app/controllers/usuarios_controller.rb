@@ -37,4 +37,16 @@ class UsuariosController < ApplicationController
             render  :editar
         end
     end
+
+    #DELETE/usuarios/:id
+    def eliminar
+        @usuario = Usuario.find(params[:id])
+        if @usuario.destroy
+            flash[:eliminar] = "Usuario #{@usuario.nombre_usuario} eliminado"
+        else
+            flash[:eliminar] = "No se pudo eliminar el usuario"
+        end
+        redirect_to nuevo_usuario_path
+    end
+
 end

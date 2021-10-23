@@ -2,3 +2,13 @@
 
 <%= @usuario.nombre_usuario %>
 <%= link_to "Editar", editar_usuario_path(@usuario), class: 'btn btn-warning' %>
+
+<%= link_to usuario_path(@usuario),
+    method: :delete, 
+    class: 'btn btn-danger',
+    data:   {confirm: '¿Está seguro que desea eliminar su cuenta?'} do %>
+
+    <i class="fa-solid fa-trash-can"></i>
+
+    Eliminar cuenta
+<% end %>

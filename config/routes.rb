@@ -29,6 +29,7 @@ Rails.application.routes.draw do
   
   post      'usuarios',                 to: 'usuarios#guardar',         as: 'usuarios'
   patch     'usuarios/:id',             to: 'usuarios#actualizar'
-
+  put       'usuarios/:id',             to: 'usuarios#actualizar'
+  delete    'usuarios/:id',             to: 'usuarios#eliminar'
   
 end
