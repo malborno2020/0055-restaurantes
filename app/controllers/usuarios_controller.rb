@@ -4,6 +4,11 @@ class UsuariosController < ApplicationController
         @usuario = Usuario.new
     end
 
+    #GET/usuarios/:id
+    def mostrar
+        @usuario = Usuario.find(params[:id])
+    end
+
     #POST/usuarios
     def guardar
         #controlar que variables recibir
@@ -11,7 +16,7 @@ class UsuariosController < ApplicationController
         #cuidado de que esta variables quede igual que la de la vista
         @usuario = Usuario.new(datos_usuario)
         if @usuario.save
-            #mostrar un mensaje de confirmacion
+           redirect_to usuario_path(@usuario)
         else
             render  :crear
         end
