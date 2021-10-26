@@ -10,15 +10,69 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_21_234720) do
+ActiveRecord::Schema.define(version: 2021_10_26_011959) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "invitaciones", force: :cascade do |t|
+    t.string "mensaje"
+    t.date "fecha"
+    t.bigint "usuario_id", null: false
+    t.bigint "restaurante_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["restaurante_id"], name: "index_invitaciones_on_restaurante_id"
+    t.index ["usuario_id"], name: "index_invitaciones_on_usuario_id"
+  end
+
+  create_table "platos", force: :cascade do |t|
+    t.string "nombre"
+    t.integer "precio"
+    t.string "descripcion"
+    t.bigint "restaurante_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["restaurante_id"], name: "index_platos_on_restaurante_id"
+  end
+
+  create_table "promociones", force: :cascade do |t|
+    t.string "nombre"
+    t.float "descuento"
+    t.bigint "usuario_id", null: false
+    t.bigint "restaurante_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["restaurante_id"], name: "index_promociones_on_restaurante_id"
+    t.index ["usuario_id"], name: "index_promociones_on_usuario_id"
+  end
 
   create_table "puntajes", force: :cascade do |t|
     t.string "tipo"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "puntajes_platos", force: :cascade do |t|
+    t.bigint "plato_id", null: false
+    t.bigint "puntaje_id", null: false
+    t.bigint "usuario_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["plato_id"], name: "index_puntajes_platos_on_plato_id"
+    t.index ["puntaje_id"], name: "index_puntajes_platos_on_puntaje_id"
+    t.index ["usuario_id"], name: "index_puntajes_platos_on_usuario_id"
+  end
+
+  create_table "puntajes_restaurantes", force: :cascade do |t|
+    t.bigint "puntaje_id", null: false
+    t.bigint "restaurante_id", null: false
+    t.bigint "usuario_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["puntaje_id"], name: "index_puntajes_restaurantes_on_puntaje_id"
+    t.index ["restaurante_id"], name: "index_puntajes_restaurantes_on_restaurante_id"
+    t.index ["usuario_id"], name: "index_puntajes_restaurantes_on_usuario_id"
   end
 
   create_table "restaurantes", force: :cascade do |t|
@@ -42,5 +96,16 @@ ActiveRecord::Schema.define(version: 2021_10_21_234720) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "invitaciones", "restaurantes"
+  add_foreign_key "invitaciones", "usuarios"
+  add_foreign_key "platos", "restaurantes"
+  add_foreign_key "promociones", "restaurantes"
+  add_foreign_key "promociones", "usuarios"
+  add_foreign_key "puntajes_platos", "platos"
+  add_foreign_key "puntajes_platos", "puntajes"
+  add_foreign_key "puntajes_platos", "usuarios"
+  add_foreign_key "puntajes_restaurantes", "puntajes"
+  add_foreign_key "puntajes_restaurantes", "restaurantes"
+  add_foreign_key "puntajes_restaurantes", "usuarios"
   add_foreign_key "restaurantes", "tipos_comidas"
 end
