@@ -14,4 +14,5 @@ class Restaurante < ApplicationRecord
   validates(:nombre, presence: true)
   validates(:nombre, uniqueness: true)
 
+  validates(:tipo_comida_id, presence: true)
 end

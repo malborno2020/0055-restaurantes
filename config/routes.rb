@@ -33,6 +33,9 @@ Rails.application.routes.draw do
   delete    'usuarios/:id',             to: 'usuarios#eliminar'
 
   #Restaurantes
-  get       'restaurantes/nuevo',       to: 'restaurantes#crear',           as: 'nuevo_restaurante'
+  get      'restaurantes',             to: 'restaurantes#listar',     as: 'restaurantes'     # listar 
+  get      'restaurantes/nuevo',       to: 'restaurantes#crear',      as: 'nuevo_restaurante'
+  post     'restaurantes',             to: 'restaurantes#guardar',    as: 'restaurante'
+  get     'restaurantes/:id/editar',   to: 'restaurantes#editar',     as: 'editar_restaurante'
 
 end

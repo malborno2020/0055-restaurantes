@@ -1,0 +1,43 @@
+<h1>
+    <i class="fas fa-fish"></i>
+    Listar restaurantes
+</h1>
+
+<%= link_to @titulo_link, nuevo_restaurante_path, class: 'btn btn-primary' %>
+
+<table class="table">
+    <tr>
+        <th>id</th>
+        <th class="text-center">nombre</th>
+        <th class="text-center">tipo_comida</th>
+        <th class="text-end">acciones</th>
+    </tr>
+
+    <% @todos_los_tipos.each do |restaurante| %>
+        <tr>
+            <td> <%= restaurante.id %> </td>
+            <td class="text-center"> 
+                <%= link_to restaurantes_path(restaurante) do %>
+                    <i class="fas fa-fish"></i>
+                    <%= restaurante.nombre %>
+                <% end %>
+            </td>
+            <td class="text-center"> 
+                <%= link_to restaurantes_path(restaurante) do %>
+                    <i class="fas fa-fish"></i>
+                    <%= restaurante.tipo_comida.tipo %>
+                <% end %>
+            </td>
+            <td class="text-end">
+                <%= link_to restaurantes_path(restaurante), class: 'btn btn-danger', method: :delete, data: { confirm: '¿Está seguro que quiere eliminar el registro?' } do %>
+                    <i class="fas fa-eraser"></i>
+                    Borrar
+                <% end %>
+                <%= link_to editar_restaurante_path(restaurante), class: 'btn btn-warning' do %>
+                    <i class="fas fa-edit"></i>
+                    Editar
+                <% end %>
+            </td>
+        </tr>
+    <% end %>
+</table>

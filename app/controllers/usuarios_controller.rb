@@ -1,4 +1,5 @@
 class UsuariosController < ApplicationController
+   before_action    :buscar_usuario, only:  [:mostrar,:editar,:actualizar,:eliminar]
     #GET/usuarios/nuevo
     def crear
         @usuario = Usuario.new
@@ -6,20 +7,17 @@ class UsuariosController < ApplicationController
 
     #GET/usuarios/:id
     def mostrar
-        @usuario = Usuario.find(params[:id])
+        
     end
 
     #GET/usuarios/editar
     def editar
-        @usuario = Usuario.find(params[:id])
+        
     end
 
     #POST/usuarios
     def guardar
-        #controlar que variables recibir
-        datos_usuario = params.require(:usuario).permit(:nombre_usuario, :password, :password_confirmation)
-        #cuidado de que esta variables quede igual que la de la vista
-        @usuario = Usuario.new(datos_usuario)
+        @usuario = Usuario.new(params_usuario)
         if @usuario.save
            redirect_to usuario_path(@usuario)
         else
@@ -29,9 +27,8 @@ class UsuariosController < ApplicationController
 
     #PATCH/usuarios/:id
     def actualizar
-        @usuario = Usuario.find(params[:id])
-        datos_usuario = params.require(:usuario).permit(:nombre_usuario, :password, :password_confirmation)
-        if @usuario.update(datos_usuario)
+       
+        if @usuario.update(params_usuario)
             redirect_to usuario_path(@usuario)
         else
             render  :editar
@@ -40,13 +37,22 @@ class UsuariosController < ApplicationController
 
     #DELETE/usuarios/:id
     def eliminar
-        @usuario = Usuario.find(params[:id])
+
         if @usuario.destroy
             flash[:eliminar] = "Usuario #{@usuario.nombre_usuario} eliminado"
         else
             flash[:eliminar] = "No se pudo eliminar el usuario"
         end
         redirect_to nuevo_usuario_path
+    end
+
+    private
+    def params_usuario
+        return params.require(:usuario).permit(:nombre_usuario, :password, :password_confirmation) #devuelve las lista de datos del formulario en HASH. Puede ir con return al comienzo o no
+    end
+
+    def buscar_usuario
+        @usuario = Usuario.find(params[:id])
     end
 
 end
