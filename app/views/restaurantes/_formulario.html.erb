@@ -1,0 +1,8 @@
+<%= form_with(model: base_restaurante) do |formulario| %>
+    <%= formulario.label        :nombre %>
+    <%= formulario.text_field   :nombre %>
+    <% if base_restaurante.errors[:nombre].any? %>
+        <%= base_restaurante.errors[:nombre].first %>
+    <% end %>
+    <%= formulario.submit %>
+<% end %>

@@ -35,7 +35,10 @@ Rails.application.routes.draw do
   #Restaurantes
   get      'restaurantes',             to: 'restaurantes#listar',     as: 'restaurantes'     # listar 
   get      'restaurantes/nuevo',       to: 'restaurantes#crear',      as: 'nuevo_restaurante'
-  post     'restaurantes',             to: 'restaurantes#guardar',    as: 'restaurante'
-  get     'restaurantes/:id/editar',   to: 'restaurantes#editar',     as: 'editar_restaurante'
+  get      'restaurantes/:id',         to: 'restaurantes#mostrar',    as: 'restaurante'  
+  post     'restaurantes',             to: 'restaurantes#guardar' 
+  patch    'restaurantes/:id',         to: 'restaurantes#actualizar'  
+  #put      'restaurantes/:id',         to: 'restaurantes#actualizar'
+  get      'restaurantes/:id/editar',  to: 'restaurantes#editar',     as: 'editar_restaurante'
 
 end

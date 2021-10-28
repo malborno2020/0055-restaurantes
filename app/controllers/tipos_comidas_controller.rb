@@ -1,5 +1,9 @@
 class TiposComidasController < ApplicationController
 
+    before_action :saludar
+    before_action :asignar_tipo_comida, only: [:mostrar, :editar, :actualizar, :eliminar]
+    
+
     # GET /tipos_comidas
     def listar
         @todos_los_tipos = TipoComida.all.order(id: :asc)
@@ -15,13 +19,13 @@ class TiposComidasController < ApplicationController
     def mostrar
         # vista para mostrar el detalle de un tipo de comida
         # por ejemplo, podríamos mostrar todos los restaruantes adjuntos
-        @tipo_comida = TipoComida.find(params[:id])
+        
     end
 
     # GET /tipos_comidas/:id/editar
     def editar
         # mostrar el formulario con los datos de un registro para cambiarlos
-        @tipo_comida = TipoComida.find(params[:id])
+        
     end
 
     # POST /tipos_comidas
@@ -39,7 +43,7 @@ class TiposComidasController < ApplicationController
 
     def actualizar
         # encontrar el registro que quiero editar en la BD
-        @tipo_comida = TipoComida.find(params[:id])
+        
         datos_tipo_comida = params.require(:tipo_comida).permit(:tipo)
         # actualizar los campos necesarios
         @tipo_comida.tipo = datos_tipo_comida[:tipo]
@@ -53,9 +57,19 @@ class TiposComidasController < ApplicationController
     def eliminar
         # pasos para eliminar un registro
         # 1. buscar el registro por ID
-        tipo = TipoComida.find(params[:id])
+        
         # 2. Intentar eliminar el registro
-        tipo.destroy
+        @tipo_comida.destroy
         redirect_to tipos_comidas_path
+    end
+
+    private #todos los metodos de aqui para abajo son privados solo el dueño de la clase tiene acceso a ellos
+
+    def asignar_tipo_comida
+        @tipo_comida = TipoComida.find(params[:id])
+    end
+
+    def saludar
+       puts "HOLA ANTES DE LA ACCION"
     end
 end
