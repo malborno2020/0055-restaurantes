@@ -42,5 +42,9 @@ Rails.application.routes.draw do
   put      'restaurantes/:id',         to: 'restaurantes#actualizar'
   patch    'restaurantes/:id',         to: 'restaurantes#actualizar'  
   delete   'restaurantes/:id',         to: 'restaurantes#eliminar'
+
+  #Platos
+  get      'platos',                   to: 'platos#listar',            as: 'platos'
+  get      'platos/nuevo',             to: 'platos#crear',             as: 'nuevo_plato'
   
 end

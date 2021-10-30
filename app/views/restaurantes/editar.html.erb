@@ -1,6 +1,6 @@
 <h2>Editar restaurante</h2>
 
-<%= render 'formulario', base_restaurante: @restaurante %>
+<%= render "formulario", restaurante: @restaurante, tipos_comidas: @tipos_comidas %>
 <%= link_to restaurantes_path do%>
     Volver
 <% end %>

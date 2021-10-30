@@ -1,8 +1,27 @@
-<%= form_with(model: base_restaurante) do |formulario| %>
-    <%= formulario.label        :nombre %>
-    <%= formulario.text_field   :nombre %>
-    <% if base_restaurante.errors[:nombre].any? %>
-        <%= base_restaurante.errors[:nombre].first %>
-    <% end %>
+<%= form_with(model: restaurante) do |formulario| %>
+
+    <div class="mb-3">
+        <%= formulario.label :nombre, class: 'form-label' %>
+        <%= formulario.text_field :nombre, class: 'form-control' %>
+         <% if @restaurante.errors[:nombre].any? %>
+            <div class="alert alert-danger" role="alert">
+                <%= @restaurante.errors[:nombre].first %>
+            </div>
+        <% end %>
+    </div>
+
+<div class ="mb-3">
+<%= formulario.label :tipo_comida_id, class:   'form-label'%>
+<%= formulario.select   :tipo_comida_id, 
+options_from_collection_for_select(tipos_comidas, :id, :tipo, restaurante.tipo_comida_id),
+{include_blank: 'Elige el tipo de comida'}, #hace referencia a las opciones del select como crear campos nuevos
+class: 'form-select' %>
+ <% if @restaurante.errors[:tipo_comida_id].any? %>
+            <div class="alert alert-danger" role="alert">
+                <%= restaurante.errors[:tipo_comida_id].first %>
+            </div>
+        <% end %>
+</div>
+
     <%= formulario.submit %>
 <% end %>
