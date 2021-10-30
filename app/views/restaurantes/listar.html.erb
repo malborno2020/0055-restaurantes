@@ -17,19 +17,19 @@
         <tr>
             <td> <%= restaurante.id %> </td>
             <td class="text-center"> 
-                <%= link_to restaurantes_path(restaurante) do %>
+                <%= link_to restaurante_path(restaurante) do %>
                     <i class="fas fa-fish"></i>
                     <%= restaurante.nombre %>
                 <% end %>
             </td>
             <td class="text-center"> 
-                <%= link_to restaurantes_path(restaurante) do %>
+                <%= link_to tipo_comida_path(restaurante.tipo_comida) do %>
                     <i class="fas fa-fish"></i>
                     <%= restaurante.tipo_comida.tipo %>
                 <% end %>
             </td>
             <td class="text-end">
-                <%= link_to restaurantes_path(restaurante), class: 'btn btn-danger', method: :delete, data: { confirm: '¿Está seguro que quiere eliminar el registro?' } do %>
+                <%= link_to restaurante_path(restaurante), class: 'btn btn-danger', method: :delete, data: { confirm: '¿Está seguro que quiere eliminar el registro?' } do %>
                     <i class="fas fa-eraser"></i>
                     Borrar
                 <% end %>

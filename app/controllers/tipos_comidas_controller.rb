@@ -1,9 +1,8 @@
 class TiposComidasController < ApplicationController
 
-    before_action :saludar
+    # before_action :saludar
     before_action :asignar_tipo_comida, only: [:mostrar, :editar, :actualizar, :eliminar]
     
-
     # GET /tipos_comidas
     def listar
         @todos_los_tipos = TipoComida.all.order(id: :asc)
@@ -69,7 +68,7 @@ class TiposComidasController < ApplicationController
         @tipo_comida = TipoComida.find(params[:id])
     end
 
-    def saludar
-       puts "HOLA ANTES DE LA ACCION"
-    end
+    # def saludar                           #este tipo de metodo usando before_action es para revisar que se está ejecutando
+    #    puts "HOLA ANTES DE LA ACCION"
+    # end
 end

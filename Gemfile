@@ -46,3 +46,8 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+#facilita ver lo qué hay en los datos de la sesión/post, 
+#así como descubrir qué consultas se están ejecutando detrás de escena
+gem 'rails-footnotes', '~> 5.0'
+

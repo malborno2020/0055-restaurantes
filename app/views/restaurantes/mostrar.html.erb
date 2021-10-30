@@ -1,11 +1,8 @@
 <h2>Detalles del Restaurante</h2>
 
-<h3>id: <%= @trestaurante.id %> </h3>
-<h1> <%= @restaurante.tipo %> </h1>
-
-<% @restaurantes.tipos_comidas.each do |tipo_comida| %>
-    <p> <%= tipo_comida.tipo %> </p>
-<% end %>
-<%= link_to restaurantes_path do %>
+<h3>id: <%= @restaurante.id %> </h3>
+<h1> <%= @restaurante.nombre %> </h1>
+<p> <%= @restaurante.tipo_comida.tipo %> </p>
+<%= link_to restaurantes_path do%>
     Volver
 <% end %>

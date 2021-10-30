@@ -1,5 +1,8 @@
 class RestaurantesController < ApplicationController
 
+
+    before_action :asignar_restaurante, only: [:mostrar,:editar,:actualizar,:eliminar]
+
     # GET /restaurantes
     def listar
         @todos_los_tipos = Restaurante.all.order(id: :asc)
@@ -13,25 +16,23 @@ class RestaurantesController < ApplicationController
     end 
 
      # GET /restaurantes/:id
-     def mostrar
+    def mostrar
         # vista para mostrar el detalle de un restaurante
-        # por ejemplo, podríamos mostrar el tipos de comida que tiene
-        @restaurante = Restaurante.find(params[:id])
+        # por ejemplo, podríamos mostrar el tipo de comida que tiene
+        
     end
 
     # GET /restaurantes/:id/editar
     def editar
         # mostrar el formulario con los datos de un registro para cambiarlos
-        @restaurante = Restaurante.find(params[:id])
+        
     end
 
     # POST /restaurantes
     def guardar
-        
-        datos_restaurantes = params.require(:restaurante).permit(:nombre, :tipo_comida_id)
-        @restaurante = Restaurante.new(datos_restaurantes)
+        @restaurante = Restaurante.new(params_restaurante)
         if @restaurante.save
-           redirect_to restaurante_path(@restaurante)#TO DO
+           redirect_to restaurantes_path
         else
             @tipos_comidas = TipoComida.all
             render  :crear
@@ -40,8 +41,8 @@ class RestaurantesController < ApplicationController
 
     def actualizar
         # encontrar el registro que quiero editar en la BD
-        @restaurante = Restaurante.find(params[:id])
-        datos_restaurante = params.require(:restaurante).permit(:nombre)
+        
+        datos_restaurante = params.require(:restaurante).permit(:nombre,:tipo_comida_id)
         # actualizar los campos necesarios
         @restaurante.nombre = datos_restaurante[:nombre]
         # guardar los cambios en la base de datos
@@ -49,4 +50,25 @@ class RestaurantesController < ApplicationController
         # redireccionar a la lista de todos los tipos de comida
         redirect_to restaurantes_path
     end
+
+
+
+     # DELETE /restaurantes/:id
+     def eliminar
+        # pasos para eliminar un registro
+        # 1. buscar el registro por ID
+        
+        # 2. Intentar eliminar el registro
+        @restaurante.destroy
+        redirect_to restaurantes_path
+    end
+
+    private
+
+    def asignar_restaurante
+        @restaurante = Restaurante.find(params[:id])
+    end
+    
+
+
 end

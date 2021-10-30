@@ -1,4 +1,7 @@
 class Restaurante < ApplicationRecord
+  
+  before_validation :convertir_a_minusculas
+  
   belongs_to :tipo_comida
   has_many  :platos
 
@@ -15,4 +18,12 @@ class Restaurante < ApplicationRecord
   validates(:nombre, uniqueness: true)
 
   validates(:tipo_comida_id, presence: true)
+
+  private
+
+  def convertir_a_minusculas
+    self.nombre.capitalize!
+    self.nombre = self.nombre.downcase
+  end
+
 end
