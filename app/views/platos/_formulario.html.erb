@@ -1,14 +1,37 @@
-<%= form_with(model: plato) do |formulario| %>
+<%= form_with(model: base_plato) do |formulario| %>
 
     <div class="mb-3">
         <%= formulario.label :nombre, class: 'form-label' %>
         <%= formulario.text_field :nombre, class: 'form-control' %>
-         <% if @plato.errors[:nombre].any? %>
+         <% if base_plato.errors[:nombre].any? %>
             <div class="alert alert-danger" role="alert">
-                <%= @plato.errors[:nombre].first %>
+                <%= base_plato.errors[:nombre].first %>
             </div>
         <% end %>
     </div>
 
+    <div class ="mb-3">
+        <%= formulario.label :restaurante_id, class:   'form-label'%>
+        <%= formulario.select   :restaurante_id, 
+        options_from_collection_for_select(restaurantes, :id, :nombre, base_plato.restaurante_id),
+        {include_blank: 'Elige el restaurante'}, class: 'form-select' %>
+        <% if base_plato.errors[:restaurante_id].any? %>
+                    <div class="alert alert-danger" role="alert">
+                        <%= base_plato.errors[:restaurante_id].first %>
+                    </div>
+            <% end %>
+    </div>
+
+    <div class ="mb-3">
+        <%= formulario.label :descripcion, class:   'form-label'%>
+        <%= formulario.text_field   :descripcion, class: 'form-select' %>
+        <% if base_plato.errors[:descripcion].any? %>
+                    <div class="alert alert-danger" role="alert">
+                        <%= base_plato.errors[:descripcion].first %>
+                    </div>
+                <% end %>
+    </div>
+
     <%= formulario.submit %>
 <% end %>
+

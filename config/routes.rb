@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
   
+  # root "votaciones#restaurante"
+  # post  "votaciones/:id_restaurante/puntaje/:id_puntaje", to: 'votaciones#votar', as: 'votar_restaurante'
+
+
   # Rutas Tipos Comidas
   get      'tipos_comidas',             to: 'tipos_comidas#listar',     as: 'tipos_comidas'     # listar 
   get      'tipos_comidas/nuevo',       to: 'tipos_comidas#crear',      as: 'nuevo_tipo_comida' # formulario de nuevo
@@ -46,5 +50,12 @@ Rails.application.routes.draw do
   #Platos
   get      'platos',                   to: 'platos#listar',            as: 'platos'
   get      'platos/nuevo',             to: 'platos#crear',             as: 'nuevo_plato'
+  get      'platos/:id',               to: 'platos#mostrar',           as: 'plato'
+  get      'platos/:id/editar',        to: 'platos#editar',            as: 'editar_plato'
+  
+  post     'platos',                   to: 'platos#guardar'
+  put      'platos/:id',               to: 'platos#actualizar'
+  patch    'platos/:id',               to: 'platos#actualizar'  
+  delete   'platos/:id',               to: 'platos#eliminar'
   
 end

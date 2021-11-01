@@ -1,0 +1,10 @@
+<h2>Detalles del plato</h2>
+
+<h3>id: <%= @plato.id %> </h3>
+<h1> <%= @plato.nombre %> </h1>
+<p> <%= @plato.restaurante.nombre %> </p>
+<p><%= @plato.restaurante.descripcion %></p>
+
+<%= link_to platos_path do%>
+    Volver
+<% end %>

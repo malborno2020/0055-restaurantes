@@ -10,18 +10,18 @@
         <% end %>
     </div>
 
-<div class ="mb-3">
-<%= formulario.label :tipo_comida_id, class:   'form-label'%>
-<%= formulario.select   :tipo_comida_id, 
-options_from_collection_for_select(tipos_comidas, :id, :tipo, restaurante.tipo_comida_id),
-{include_blank: 'Elige el tipo de comida'}, #hace referencia a las opciones del select como crear campos nuevos
-class: 'form-select' %>
- <% if @restaurante.errors[:tipo_comida_id].any? %>
-            <div class="alert alert-danger" role="alert">
-                <%= restaurante.errors[:tipo_comida_id].first %>
-            </div>
-        <% end %>
-</div>
+    <div class ="mb-3">
+    <%= formulario.label :tipo_comida_id, class:   'form-label'%>
+    <%= formulario.select   :tipo_comida_id, 
+    options_from_collection_for_select(tipos_comidas, :id, :tipo, restaurante.tipo_comida_id),
+    {include_blank: 'Elige el tipo de comida'}, #hace referencia a las opciones del select como crear campos nuevos
+    class: 'form-select' %>
+    <% if @restaurante.errors[:tipo_comida_id].any? %>
+                <div class="alert alert-danger" role="alert">
+                    <%= restaurante.errors[:tipo_comida_id].first %>
+                </div>
+            <% end %>
+    </div>
 
     <%= formulario.submit %>
 <% end %>

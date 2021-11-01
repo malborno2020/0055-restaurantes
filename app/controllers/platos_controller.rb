@@ -1,7 +1,7 @@
 class PlatosController < ApplicationController
 
 
-    # before_action :asignar_plato, only: [:mostrar,:editar,:actualizar,:eliminar]
+    before_action :asignar_plato, only: [:mostrar,:editar,:actualizar,:eliminar]
 
     # GET /platos
     def listar
@@ -12,56 +12,55 @@ class PlatosController < ApplicationController
     #GET /platos/nuevo
     def crear
         @plato    =  Plato.new
-        @platos  =  Plato.all
+        @restaurantes  =  Restaurante.all
     end 
 
-    #  # GET /platos/:id
-    # def mostrar
-    #     # vista para mostrar el detalle de un plato
-    #     # por ejemplo, podríamos mostrar su descripcion
+     # GET /platos/:id
+    def mostrar
+        # vista para mostrar el detalle de un plato
+        # por ejemplo, podríamos mostrar su descripcion
+        @plato = Plato.find(params[:id])
+    end
+
+    # GET /plato/:id/editar
+    def editar
+        # mostrar el formulario con los datos de un registro para cambiarlos
         
-    # end
+    end
 
-    # # GET /plato/:id/editar
-    # def editar
-    #     # mostrar el formulario con los datos de un registro para cambiarlos
+    # POST /platos
+    def guardar
         
-    # end
+        @plato = Plato.new(params_plato)
+        if @plato.save
+           redirect_to platos_path(@plato)
+        else
+            @restaurantes = Restaurante.all
+            render  :crear
+        end
+    end
 
-    # # POST /platos
-    # def guardar
-    #     @plato = Plato.new(params_plato)
-    #     if @plato.save
-    #        redirect_to platos_path
-    #     else
-    #         @platos = Plato.all
-    #         render  :crear
-    #     end
-    # end
+    def actualizar
+        # encontrar el registro que quiero editar en la BD
+        if @plato.update(params_plato)
+            redirect_to plato_path(@plato)
+        else
+            @restaurantes = Restaurante.all
+            render  :editar 
+        end
+    end
 
-    # def actualizar
-    #     # encontrar el registro que quiero editar en la BD
+
+
+     # DELETE /platos/:id
+     def eliminar
+        # pasos para eliminar un registro
+        # 1. buscar el registro por ID
         
-    #     datos_plato = params.require(:plato).permit(:nombre,:restaurante_id)
-    #     # actualizar los campos necesarios
-    #     @plato.nombre = datos_plato[:nombre]
-    #     # guardar los cambios en la base de datos
-    #     @plato.save
-    #     # redireccionar a la lista de todos los platos
-    #     redirect_to platos_path
-    # end
-
-
-
-    #  # DELETE /platos/:id
-    #  def eliminar
-    #     # pasos para eliminar un registro
-    #     # 1. buscar el registro por ID
-        
-    #     # 2. Intentar eliminar el registro
-    #     @plato.destroy
-    #     redirect_to platos_path
-    # end
+        # 2. Intentar eliminar el registro
+        @plato.destroy
+        redirect_to platos_path
+    end
 
     private
 
@@ -69,5 +68,9 @@ class PlatosController < ApplicationController
         @plato = Plato.find(params[:id])
     end
         
+    def params_plato
+        params.require(:plato).permit(:nombre, :restaurante_id, :descripcion)
+    end
+
 
 end
