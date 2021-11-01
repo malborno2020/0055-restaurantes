@@ -2,6 +2,7 @@ class PlatosController < ApplicationController
 
 
     before_action :asignar_plato, only: [:mostrar,:editar,:actualizar,:eliminar]
+    before_action   :consultar_restaurantes, only:  [:crear,:editar]
 
     # GET /platos
     def listar
@@ -12,14 +13,14 @@ class PlatosController < ApplicationController
     #GET /platos/nuevo
     def crear
         @plato    =  Plato.new
-        @restaurantes  =  Restaurante.all
+    
     end 
 
      # GET /platos/:id
     def mostrar
         # vista para mostrar el detalle de un plato
         # por ejemplo, podríamos mostrar su descripcion
-        @plato = Plato.find(params[:id])
+       
     end
 
     # GET /plato/:id/editar
@@ -35,7 +36,7 @@ class PlatosController < ApplicationController
         if @plato.save
            redirect_to platos_path(@plato)
         else
-            @restaurantes = Restaurante.all
+            consultar_restaurantes
             render  :crear
         end
     end
@@ -45,7 +46,7 @@ class PlatosController < ApplicationController
         if @plato.update(params_plato)
             redirect_to plato_path(@plato)
         else
-            @restaurantes = Restaurante.all
+            consultar_restaurantes
             render  :editar 
         end
     end
@@ -72,5 +73,8 @@ class PlatosController < ApplicationController
         params.require(:plato).permit(:nombre, :restaurante_id, :descripcion)
     end
 
+    def consultar_restaurantes
+        @restaurantes = Restaurante.all
+    end
 
 end
