@@ -1,18 +1,18 @@
-# class VotacionesController < ApplicationController
+class VotacionesController < ApplicationController
 
-#     def restaurante
-#         @restaurantes = Restaurante.includes(:puntajes)
-#         @puntajes = Puntaje.all
-#         if params[:buscar]
-#             @restaurantes = @restaurantes.select do |r|
-#                 r.nombre.downcase.include? params[:buscar].downcase
-#             end
-#         end
-#     end
+    def listar
+        @restaurantes = Restaurante.all
+        @lista_puntajes = Puntaje.all
+    end
 
-#     def votar
-#         PuntajeRestaurante.create(usuario_id: 7, restaurante_id: params[:id_restaurante], puntaje_id: params[:id_puntaje])
-#         puts "HAS VOTADO".center(50, "*")
-#         redirect_to root_path
-#     end
-# end
+    # POST votaciones/:id_restaurante/puntaje/:id_puntaje
+    def votar
+        voto = PuntajeRestaurante.new
+        voto.restaurante_id = params[:id_restaurante]
+        voto.puntaje_id     = params[:id_puntaje]
+        voto.usuario_id     = 10
+        voto.save
+        
+        redirect_to root_path
+    end
+end

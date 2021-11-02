@@ -1,0 +1,9 @@
+<div class="card" style="width: 18rem;">
+    <div class="card-body">
+        <h5 class="card-title"><%= base_restaurante.nombre %></h5>
+        <h6 class="card-subtitle mb-2 text-muted"><%= base_restaurante.tipo_comida.tipo %></h6>
+        <% puntajes.each do |p| %>
+            <%= link_to p.tipo, votar_restaurante_path(base_restaurante, p), method: :post, class: 'btn' %>
+        <% end %>
+    </div>
+</div>
