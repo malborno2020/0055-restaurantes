@@ -1,0 +1,36 @@
+<h1>
+    <i class="bi bi-people-fill"></i>
+    Lista de Usuarios
+</h1>
+
+<%= link_to @titulo_link, nuevo_usuario_path, class: 'btn btn-primary' %>
+
+<table class="table">
+    <tr>
+        <th>id</th>
+        <th class="text-center">Nombre</th>
+    </tr>
+
+    <% @todos_los_usuarios.each do |usuario| %>
+        <tr>
+            <td> <%= usuario.id %> </td>
+            <td class="text-center"> 
+                <%= link_to usuario_path(usuario) do %>
+                    <i class="bi bi-people-fill"></i>
+                    <%= usuario.nombre_usuario %>
+                <% end %>
+            </td>
+            
+            <td class="text-end">
+                <%= link_to usuario_path(usuario), class: 'btn btn-danger', method: :delete, data: { confirm: '¿Está seguro que quiere eliminar el usuario?' } do %>
+                    <i class="fas fa-eraser"></i>
+                    Borrar
+                <% end %>
+                <%= link_to editar_usuario_path(usuario), class: 'btn btn-warning' do %>
+                    <i class="fas fa-edit"></i>
+                    Editar
+                <% end %>
+            </td>
+        </tr>
+    <% end %>
+</table>

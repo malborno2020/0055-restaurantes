@@ -1,6 +1,15 @@
 class UsuariosController < ApplicationController
    before_action    :buscar_usuario, only:  [:mostrar,:editar,:actualizar,:eliminar]
-    #GET/usuarios/nuevo
+    
+    # GET /usuarios
+    def listar
+        @todos_los_usuarios = Usuario.all.order(id: :asc)
+        @titulo_link = "Registrar un nuevo usuario"
+    end
+   
+   
+   
+   #GET/usuarios/nuevo
     def crear
         @usuario = Usuario.new
     end

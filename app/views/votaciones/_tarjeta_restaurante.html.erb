@@ -4,6 +4,8 @@
         <h6 class="card-subtitle mb-2 text-muted"><%= base_restaurante.tipo_comida.tipo %></h6>
         <% puntajes.each do |p| %>
             <%= link_to p.tipo, votar_restaurante_path(base_restaurante, p), method: :post, class: 'btn' %>
+            <!-- <% base_restaurante.puntajes_restaurantes.select{ |pr| pr.puntaje_id == p.id  }.count %> -->
+            <%= base_restaurante.puntajes_restaurantes.where(puntaje_id: p.id).count %>
         <% end %>
     </div>
 </div>
