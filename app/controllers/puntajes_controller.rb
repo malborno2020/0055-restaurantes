@@ -1,5 +1,7 @@
 class PuntajesController < ApplicationController
 
+    before_action   :asignar_puntaje, only: [:mostrar,:editar,:actualizar,:eliminar] 
+
     #GET/puntajes/listar
     def listar
         @todos_los_puntajes = Puntaje.all.order(id: :asc)
@@ -15,13 +17,11 @@ class PuntajesController < ApplicationController
     def mostrar
         # vista para mostrar el detalle de un puntaje
         # por ejemplo, mostrar todos los restaurantes con ese puntaje
-        @puntaje = Puntaje.find(params[:id])
     end
 
     # GET /puntajes/:id/editar
     def editar
         # mostrar el formulario con los datos de un registro para cambiarlos
-        @puntaje = Puntaje.find(params[:id])
     end
 
     # POST /puntajes
@@ -38,7 +38,6 @@ class PuntajesController < ApplicationController
 
     def actualizar
         # encontrar el registro que quiero editar en la BD
-        @puntaje = Puntaje.find(params[:id])
         datos_puntaje = params.require(:puntaje).permit(:tipo)
         # actualizar los campos necesarios
         @puntaje.tipo = datos_puntaje[:tipo]
@@ -52,10 +51,16 @@ class PuntajesController < ApplicationController
     def eliminar
         # pasos para eliminar un registro
         # 1. buscar el registro por ID
-        tipo = Puntaje.find(params[:id])
         # 2. Intentar eliminar el registro
-        tipo.destroy
+        @puntaje.destroy
         redirect_to puntajes_path
     end
+
+    private
+
+    def asignar_puntaje
+        @puntaje = Puntaje.find(params[:id])
+    end
+
     
 end

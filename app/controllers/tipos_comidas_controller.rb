@@ -30,8 +30,8 @@ class TiposComidasController < ApplicationController
     # POST /tipos_comidas
     def guardar
         # guardar lo que llegue del formulario en la base de datos
-        datos_tipo_comida = params.require(:tipo_comida).permit(:tipo)
-        @tipo_comida = TipoComida.new(datos_tipo_comida)
+        # datos_tipo_comida = params.require(:tipo_comida).permit(:tipo)
+        @tipo_comida = TipoComida.new(params_tipo_comida)
         if @tipo_comida.save
             redirect_to tipos_comidas_path
         else
@@ -43,9 +43,9 @@ class TiposComidasController < ApplicationController
     def actualizar
         # encontrar el registro que quiero editar en la BD
         
-        datos_tipo_comida = params.require(:tipo_comida).permit(:tipo)
+        # datos_tipo_comida = params.require(:tipo_comida).permit(:tipo)
         # actualizar los campos necesarios
-        @tipo_comida.tipo = datos_tipo_comida[:tipo]
+        @tipo_comida.tipo = params_tipo_comida[:tipo]
         # guardar los cambios en la base de datos
         @tipo_comida.save
         # redireccionar a la lista de todos los tipos de comida
@@ -67,6 +67,12 @@ class TiposComidasController < ApplicationController
     def asignar_tipo_comida
         @tipo_comida = TipoComida.find(params[:id])
     end
+
+    def params_tipo_comida
+        datos_tipo_comida = params.require(:tipo_comida).permit(:tipo)
+    end
+
+
 
     # def saludar                           #este tipo de metodo usando before_action es para revisar que se está ejecutando
     #    puts "HOLA ANTES DE LA ACCION"

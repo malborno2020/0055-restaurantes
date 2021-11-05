@@ -39,22 +39,15 @@ class RestaurantesController < ApplicationController
         end
     end
 
-    # def actualizar
-    #     # encontrar el registro que quiero editar en la BD
-        
-    #     datos_restaurante = params.require(:restaurante).permit(:nombre,:tipo_comida_id)
-    #     # actualizar los campos necesarios
-    #     @restaurante.nombre = datos_restaurante[:nombre]
-    #     # guardar los cambios en la base de datos
-    #     @restaurante.save
-    #     # redireccionar a la lista de todos los tipos de comida
-    #     redirect_to restaurantes_path
-    # end
 
     def actualizar
+        # encontrar el registro que quiero editar en la BD
+        # actualizar los campos necesarios
         @restaurante.nombre = params_restaurante[:nombre]
         @restaurante.tipo_comida_id = params_restaurante[:tipo_comida_id]
+        # guardar los cambios en la base de datos
         if @restaurante.save
+            # redireccionar a la lista de todos los tipos de comida
             redirect_to restaurantes_path
         else
             @tipos_comidas = TipoComida.all

@@ -1,8 +1,8 @@
 class Usuario < ApplicationRecord
     before_validation   :convertir_a_mayusculas
 
-    after_save  :enviar_correo
-    after_destroy   :mostrar_el_eliminado
+    # after_save  :enviar_correo
+    # after_destroy   :mostrar_el_eliminado
 
     has_secure_password
 
@@ -20,17 +20,17 @@ class Usuario < ApplicationRecord
     validates   :nombre_usuario, uniqueness:    true
 
     def convertir_a_mayusculas
-        puts "ANTES DE LA VALIDACION"
-        self.tipo.capitalize!
+        # puts "ANTES DE LA VALIDACION"
+        self.nombre_usuario.capitalize!
         #@tipo.capitalize!
     end
 
-    def enviar_correo
-        puts "DESPUES DE GUARDAR".center(50, ".")
-    end
+    # def enviar_correo
+    #     puts "DESPUES DE GUARDAR".center(50, ".")
+    # end
 
-    def mostrar_el_eliminado
-        puts "#{self.tipo} ELIMINADO".center(50, "00000")
-    end
+    # def mostrar_el_eliminado
+    #     puts "#{self.tipo} ELIMINADO".center(50, "00000")
+    # end
 
 end

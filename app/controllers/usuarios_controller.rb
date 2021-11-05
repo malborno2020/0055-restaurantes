@@ -57,7 +57,8 @@ class UsuariosController < ApplicationController
 
     private
     def params_usuario
-        return params.require(:usuario).permit(:nombre_usuario, :password, :password_confirmation) #devuelve las lista de datos del formulario en HASH. Puede ir con return al comienzo o no
+        return params.require(:usuario).permit(:nombre_usuario, :password, :password_confirmation) #devuelve las lista de datos del formulario 
+            # en HASH. Puede ir con return al comienzo o no
     end
 
     def buscar_usuario
